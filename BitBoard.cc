@@ -1,28 +1,10 @@
-#include "BitBoard.h"
 #include <bitset>
 #include <iostream>
 #include <string>
 
-typedef struct Boards {
-    // White pieces 
-    BitBoard WhitePawns;
-    BitBoard WhiteKnights;
-    BitBoard WhiteRooks;
-    BitBoard WhiteBishops;
-    BitBoard WhiteQueens;
-    BitBoard WhiteKing;
-    // Black pieces
-    BitBoard BlackPawns;
-    BitBoard BlackKnights;
-    BitBoard BlackRooks;
-    BitBoard BlackBishops;
-    BitBoard BlackQueens;
-    BitBoard BlackKing;
-    // Meta positions
-    BitBoard WhitePieces;
-    BitBoard BlackPieces;
-    BitBoard AllPieces;
-} boards;
+#include "BitBoard.h"
+#include "test_pieces.cc"
+
 
 void apply_initial_positions ( Boards &board ){
     board.WhitePawns    = 0x000000000000ff00;
@@ -46,10 +28,6 @@ void apply_initial_positions ( Boards &board ){
     board.AllPieces = board.WhitePieces | board.BlackPieces ;
 }
 
-void check_boards ( std::bitset bits ){
-    std::string = '1111111111111111000000000000000000000000000000001111111111111111'
-}
-
 void draw_board ( BitBoard &board ){
     std::bitset<64> board_representation ( board );
     for ( int i; i <= 63 ; ++i ){
@@ -65,7 +43,9 @@ int main (){
     Boards boards ;
     apply_initial_positions ( boards );
 
-    draw_board ( boards.AllPieces );
+    //draw_board ( boards.AllPieces );
+    run_piece_tests ( boards );
+
 
     return 0;
 }
