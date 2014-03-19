@@ -30,7 +30,7 @@ void apply_initial_positions ( Boards &board ){
 
 void draw_board ( BitBoard &board ){
     std::bitset<64> board_representation ( board );
-    for ( int i; i <= 63 ; ++i ){
+    for ( int i=0; i <= 63 ; ++i ){
         std::cout << board_representation [i] ;
         if (( (i+1) % 8) == 0 ) {
             std::cout << std::endl;
@@ -45,7 +45,6 @@ int main (){
 
     //draw_board ( boards.AllPieces );
     run_piece_tests ( boards );
-
 
     return 0;
 }
