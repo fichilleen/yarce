@@ -9,17 +9,17 @@ using std::string;
 START */
 void test_all_pieces ( const string &pieces ){
     string all_pieces = "1111111111111111000000000000000000000000000000001111111111111111";
-    make_assertation ( "boards.AllPieces", all_pieces, pieces );
+    make_assertation ( "boards.all_pieces", all_pieces, pieces );
 }
 
 void test_all_white_pieces ( const string &pieces ){
     string white_pieces = "0000000000000000000000000000000000000000000000001111111111111111";
-    make_assertation ( "boards.WhitePieces", white_pieces, pieces );
+    make_assertation ( "boards.white_pieces", white_pieces, pieces );
 }
 
 void test_all_black_pieces ( const string &pieces ){
     string test_pieces = "1111111111111111000000000000000000000000000000000000000000000000";
-    make_assertation ( "boards.BlackPieces", test_pieces, pieces );
+    make_assertation ( "boards.black_pieces", test_pieces, pieces );
 }
 /* Testing collections of pieces that have being OR'd together 
 END */
@@ -28,12 +28,12 @@ END */
 START */
 void test_white_pawns ( const string &pieces ){
     string test_pieces = "0000000000000000000000000000000000000000000000001111111100000000";
-    make_assertation ( "boards.WhitePawns", test_pieces, pieces );
+    make_assertation ( "boards.white_pawns", test_pieces, pieces );
 }
 
 void test_white_rooks ( const string &pieces ){
     string test_pieces = "0000000000000000000000000000000000000000000000000000000010000001";
-    make_assertation ( "boards.WhiteRooks", test_pieces, pieces );
+    make_assertation ( "boards.white_rooks", test_pieces, pieces );
 }
 
 /* Testing white pieces starting positions
@@ -45,13 +45,13 @@ void test_no_conflicting_pieces ( const Boards boards ){
     // Make sure no two pieces are placed on the same square. Useful at any
     // point of the execution
     const static string test_pieces = "0000000000000000000000000000000000000000000000000000000000000000";
-    BitBoard AndPieces = \
-        boards.WhitePawns & boards.WhiteKnights & boards.WhiteRooks & \
-        boards.WhiteBishops & boards.WhiteQueens & boards.WhiteKing & \
-        boards.BlackPawns & boards.BlackKnights & boards.BlackRooks & \
-        boards.BlackBishops & boards.BlackQueens & boards.BlackKing;
+    BitBoard and_pieces = \
+        boards.white_pawns & boards.white_knights & boards.white_rooks & \
+        boards.white_bishops & boards.white_queens & boards.white_king & \
+        boards.black_pawns & boards.black_knights & boards.black_rooks & \
+        boards.black_bishops & boards.black_queens & boards.black_king;
     string and_pieces_str;
-    piece_to_string ( and_pieces_str, AndPieces );
+    piece_to_string ( and_pieces_str, and_pieces );
     make_assertation ( "No conflicting pieces", and_pieces_str, test_pieces );
 }
 
@@ -77,19 +77,19 @@ void run_piece_tests ( const Boards boards ){
     std::cout << "# Running sanity tests" << std::endl;
     std::cout << "################################################################################" << std::endl;
 
-    piece_to_string ( str_piece, boards.AllPieces );
+    piece_to_string ( str_piece, boards.all_pieces );
     test_all_pieces ( str_piece );
 
-    piece_to_string ( str_piece, boards.WhitePieces );
+    piece_to_string ( str_piece, boards.white_pieces );
     test_all_white_pieces ( str_piece );
 
-    piece_to_string ( str_piece, boards.BlackPieces );
+    piece_to_string ( str_piece, boards.black_pieces );
     test_all_black_pieces ( str_piece );
 
-    piece_to_string ( str_piece, boards.WhitePawns );
+    piece_to_string ( str_piece, boards.white_pawns );
     test_white_pawns ( str_piece );
 
-    piece_to_string ( str_piece, boards.WhiteRooks );
+    piece_to_string ( str_piece, boards.white_rooks );
     test_white_rooks ( str_piece );
 
     test_no_conflicting_pieces ( boards );

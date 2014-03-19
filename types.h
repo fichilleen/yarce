@@ -4,24 +4,24 @@
 typedef unsigned long long BitBoard;
 
 typedef struct Boards {
-    // White pieces 
-    BitBoard WhitePawns;
-    BitBoard WhiteKnights;
-    BitBoard WhiteRooks;
-    BitBoard WhiteBishops;
-    BitBoard WhiteQueens;
-    BitBoard WhiteKing;
-    // Black pieces
-    BitBoard BlackPawns;
-    BitBoard BlackKnights;
-    BitBoard BlackRooks;
-    BitBoard BlackBishops;
-    BitBoard BlackQueens;
-    BitBoard BlackKing;
+    // white_ pieces 
+    BitBoard white_pawns;
+    BitBoard white_knights;
+    BitBoard white_rooks;
+    BitBoard white_bishops;
+    BitBoard white_queens;
+    BitBoard white_king;
+    // black_ pieces
+    BitBoard black_pawns;
+    BitBoard black_knights;
+    BitBoard black_rooks;
+    BitBoard black_bishops;
+    BitBoard black_queens;
+    BitBoard black_king;
     // Meta positions
-    BitBoard WhitePieces;
-    BitBoard BlackPieces;
-    BitBoard AllPieces;
+    BitBoard white_pieces;
+    BitBoard black_pieces;
+    BitBoard all_pieces;
 } boards;
 
 #endif /* YARCE_TYPES_H */
