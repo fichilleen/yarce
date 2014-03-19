@@ -3,7 +3,7 @@
 #include <string>
 
 #include "BitBoard.h"
-#include "test_pieces.cc"
+#include "test_pieces.h"
 
 
 void apply_initial_positions ( Boards &board ){
