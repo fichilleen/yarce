@@ -44,21 +44,22 @@ END (once I add more tests) */
 void test_no_conflicting_pieces ( const Boards boards ){
     // Make sure no two pieces are placed on the same square. Useful at any
     // point of the execution
-    const static string test_pieces = "0000000000000000000000000000000000000000000000000000000000000000";
+    const static unsigned long long test_pieces = 0;
     BitBoard and_pieces = \
         boards.white_pawns & boards.white_knights & boards.white_rooks & \
         boards.white_bishops & boards.white_queens & boards.white_king & \
         boards.black_pawns & boards.black_knights & boards.black_rooks & \
         boards.black_bishops & boards.black_queens & boards.black_king;
-    string and_pieces_str;
-    piece_to_string ( and_pieces_str, and_pieces );
-    make_assertation ( "No conflicting pieces", and_pieces_str, test_pieces );
+    assert ( and_pieces == test_pieces );
+    std::cout.width ( 25 );
+    std::cout << "No conflicting pieces" << std::left << ": Passed" << std::endl;
 }
 
 void make_assertation ( const string &testname, const string &exp, const string &actual ){
     // Just to keep the repetition of print, formatting and assertions in
     // other functions to a minimum
     assert ( exp == actual );
+    // TODO: Why does the first instance of this get formatted incorrectly?
     std::cout.width ( 25 );
     std::cout << testname << std::left << ": Passed" << std::endl;
 }
