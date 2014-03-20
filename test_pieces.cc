@@ -59,6 +59,38 @@ void test_white_king ( const string &pieces ){
 /* Testing white pieces starting positions
 END */
 
+/* Testing black pieces starting positions
+START */
+void test_black_pawns ( const string &pieces ){
+    string test_pieces = "0000000011111111000000000000000000000000000000000000000000000000";
+    make_assertation ( "boards.black_pawns", test_pieces, pieces );
+}
+
+void test_black_rooks ( const string &pieces ){
+    string test_pieces = "1000000100000000000000000000000000000000000000000000000000000000";
+    make_assertation ( "boards.black_rooks", test_pieces, pieces );
+}
+
+void test_black_knights ( const string &pieces ){
+    string test_pieces = "0100001000000000000000000000000000000000000000000000000000000000";
+    make_assertation ( "boards.black_knights", test_pieces, pieces );
+}
+
+void test_black_bishops ( const string &pieces ){
+    string test_pieces = "0010010000000000000000000000000000000000000000000000000000000000";
+    make_assertation ( "boards.black_bishops", test_pieces, pieces );
+}
+
+void test_black_queens ( const string &pieces ){
+    string test_pieces = "0001000000000000000000000000000000000000000000000000000000000000";
+    make_assertation ( "boards.black_queens", test_pieces, pieces );
+}
+
+void test_black_king ( const string &pieces ){
+    string test_pieces = "0000100000000000000000000000000000000000000000000000000000000000";
+    make_assertation ( "boards.black_king", test_pieces, pieces );
+}
+
 /* Misc tests */
 
 void test_no_conflicting_pieces ( const Boards boards ){
@@ -125,6 +157,25 @@ void run_piece_tests ( const Boards boards ){
 
     piece_to_string ( str_piece, boards.white_king );
     test_white_king ( str_piece );
+
+    /* Black pieces */
+    piece_to_string ( str_piece, boards.black_pawns );
+    test_black_pawns ( str_piece );
+
+    piece_to_string ( str_piece, boards.black_rooks );
+    test_black_rooks ( str_piece );
+
+    piece_to_string ( str_piece, boards.black_knights );
+    test_black_knights ( str_piece );
+
+    piece_to_string ( str_piece, boards.black_bishops );
+    test_black_bishops ( str_piece );
+
+    piece_to_string ( str_piece, boards.black_queens );
+    test_black_queens ( str_piece );
+
+    piece_to_string ( str_piece, boards.black_king );
+    test_black_king ( str_piece );
 
     test_no_conflicting_pieces ( boards );
 }
