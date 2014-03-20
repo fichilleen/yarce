@@ -4,8 +4,14 @@
 void test_all_pieces ( const std::string &pieces );
 void test_all_white_pieces ( const std::string &pieces );
 void test_all_black_pieces ( const std::string &pieces );
+// White pieces
 void test_white_pawns ( const std::string &pieces );
 void test_white_rooks ( const std::string &pieces );
+void test_white_knights ( const std::string &pieces );
+void test_white_bishops ( const std::string &pieces );
+void test_white_queens ( const std::string &pieces );
+void test_white_king ( const std::string &pieces );
+
 void test_no_conflicting_pieces ( const Boards boards );
 
 void piece_to_string ( std::string &result, const BitBoard bb );

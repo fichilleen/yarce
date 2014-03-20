@@ -36,8 +36,28 @@ void test_white_rooks ( const string &pieces ){
     make_assertation ( "boards.white_rooks", test_pieces, pieces );
 }
 
+void test_white_knights ( const string &pieces ){
+    string test_pieces = "0000000000000000000000000000000000000000000000000000000001000010";
+    make_assertation ( "boards.white_knights", test_pieces, pieces );
+}
+
+void test_white_bishops ( const string &pieces ){
+    string test_pieces = "0000000000000000000000000000000000000000000000000000000000100100";
+    make_assertation ( "boards.white_bishops", test_pieces, pieces );
+}
+
+void test_white_queens ( const string &pieces ){
+    string test_pieces = "0000000000000000000000000000000000000000000000000000000000010000";
+    make_assertation ( "boards.white_queens", test_pieces, pieces );
+}
+
+void test_white_king ( const string &pieces ){
+    string test_pieces = "0000000000000000000000000000000000000000000000000000000000001000";
+    make_assertation ( "boards.white_king", test_pieces, pieces );
+}
+
 /* Testing white pieces starting positions
-END (once I add more tests) */
+END */
 
 /* Misc tests */
 
@@ -87,11 +107,25 @@ void run_piece_tests ( const Boards boards ){
     piece_to_string ( str_piece, boards.black_pieces );
     test_all_black_pieces ( str_piece );
 
+    /* White pieces */
     piece_to_string ( str_piece, boards.white_pawns );
     test_white_pawns ( str_piece );
 
     piece_to_string ( str_piece, boards.white_rooks );
     test_white_rooks ( str_piece );
 
+    piece_to_string ( str_piece, boards.white_knights );
+    test_white_knights ( str_piece );
+
+    piece_to_string ( str_piece, boards.white_bishops );
+    test_white_bishops ( str_piece );
+
+    piece_to_string ( str_piece, boards.white_queens );
+    test_white_queens ( str_piece );
+
+    piece_to_string ( str_piece, boards.white_king );
+    test_white_king ( str_piece );
+
     test_no_conflicting_pieces ( boards );
 }
+
