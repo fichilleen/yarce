@@ -3,6 +3,8 @@
 #include <string>
 
 #include "BitBoard.h"
+#include "draw_board.h"
+#include "shift_test.h"
 #include "test_pieces.h"
 
 
@@ -21,6 +23,9 @@ void apply_initial_positions ( Boards &board ){
     board.black_queens   = 0x1000000000000000;
     board.black_king     = 0x0800000000000000;
     //
+}
+
+void update_boards ( Boards &board ){
     board.white_pieces = board.white_pawns | board.white_knights | board.white_rooks | \
                     board.white_bishops | board.white_queens | board.white_king ;
     board.black_pieces = board.black_pawns | board.black_knights | board.black_rooks | \
@@ -28,23 +33,19 @@ void apply_initial_positions ( Boards &board ){
     board.all_pieces = board.white_pieces | board.black_pieces ;
 }
 
-void draw_board ( BitBoard &board ){
-    std::bitset<64> board_representation ( board );
-    for ( int i=0; i <= 63 ; ++i ){
-        std::cout << board_representation [i] ;
-        if (( (i+1) % 8) == 0 ) {
-            std::cout << std::endl;
-        }
-    }
-    std::cout << std::endl;
-}
 
 int main (){
     Boards boards ;
     apply_initial_positions ( boards );
+    update_boards ( boards );
 
-    //draw_board ( boards.all_pieces );
+    draw_board ( (BitBoard)boards.all_pieces );
     run_piece_tests ( boards );
+    direction east = EAST;
+    king_shift ( boards.black_king, east );
+    update_boards ( boards );
+    draw_board ( (BitBoard)boards.all_pieces );
+
 
     return 0;
 }
