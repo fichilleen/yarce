@@ -4,9 +4,9 @@
 
 void draw_board ( const BitBoard &board ){
     std::bitset<64> board_representation ( board );
-    for ( int i=0; i <= 63 ; ++i ){
+    for ( int i=63; i >= 0 ; --i ){
         std::cout << board_representation [i] ;
-        if (( (i+1) % 8) == 0 ) {
+        if (( i % 8) == 0 ) {
             std::cout << std::endl;
         }
     }
