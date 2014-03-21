@@ -40,14 +40,27 @@ typedef struct Boards {
     BitBoard all_pieces;
 } boards;
 
-const BitBoard file_a = 0x0101010101010101ULL;
-const BitBoard file_b = file_a << 1;
-const BitBoard file_c = file_a << 2;
-const BitBoard file_d = file_a << 3;
-const BitBoard file_e = file_a << 4;
-const BitBoard file_f = file_a << 5;
-const BitBoard file_g = file_a << 6;
-const BitBoard file_h = file_a << 7;
+// NOTE: The following code defining ranks and files is more or less copied
+// straight from stockfish. A very strong FOSS chess engine:
+// https://github.com/mcostalba/Stockfish
+
+const BitBoard FILE_A = 0x0101010101010101ULL;
+const BitBoard FILE_B = FILE_A << 1;
+const BitBoard FILE_C = FILE_A << 2;
+const BitBoard FILE_D = FILE_A << 3;
+const BitBoard FILE_E = FILE_A << 4;
+const BitBoard FILE_F = FILE_A << 5;
+const BitBoard FILE_G = FILE_A << 6;
+const BitBoard FILE_H = FILE_A << 7;
+
+const BitBoard RANK_1 = 0xFF;
+const BitBoard RANK_2 = RANK_1 << (8 * 1);
+const BitBoard RANK_3 = RANK_1 << (8 * 2);
+const BitBoard RANK_4 = RANK_1 << (8 * 3);
+const BitBoard RANK_5 = RANK_1 << (8 * 4);
+const BitBoard RANK_6 = RANK_1 << (8 * 5);
+const BitBoard RANK_7 = RANK_1 << (8 * 6);
+const BitBoard RANK_8 = RANK_1 << (8 * 7);
 
 // Directions
 typedef unsigned short direction;
