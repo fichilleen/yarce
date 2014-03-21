@@ -62,11 +62,7 @@ const BitBoard RANK_6 = RANK_1 << (8 * 5);
 const BitBoard RANK_7 = RANK_1 << (8 * 6);
 const BitBoard RANK_8 = RANK_1 << (8 * 7);
 
-// Directions
-typedef unsigned short direction;
-# define NORTHWEST 1
-# define NORTH 2
-# define NORTHEAST 3
-# define EAST 4
+// Movement directions
+enum directions { NORTHWEST, NORTHEAST, NORTH, EAST, SOUTHEAST, SOUTH, SOUTHWEST };
 
 #endif /* YARCE_TYPES_H */
