@@ -39,12 +39,12 @@ int main (){
     apply_initial_positions ( boards );
     update_boards ( boards );
 
-    draw_board ( (BitBoard)boards.all_pieces );
+    draw_board ( boards.all_pieces );
     run_piece_tests ( boards );
     direction east = EAST;
     king_shift ( boards.black_king, east );
     update_boards ( boards );
-    draw_board ( (BitBoard)boards.all_pieces );
+    draw_board ( boards.all_pieces );
 
 
     return 0;
