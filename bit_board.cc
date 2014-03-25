@@ -18,7 +18,7 @@
 #include <iostream>
 #include <string>
 
-#include "BitBoard.h"
+#include "bit_board.h"
 #include "draw_board.h"
 #include "shift_test.h"
 #include "test_pieces.h"
