@@ -15,6 +15,7 @@
 */
 
 #include "test_pieces.h"
+#include "identify_piece.h"
 #include <bitset>
 #include <cassert>
 #include <iostream>
@@ -146,6 +147,7 @@ void run_piece_tests ( const Boards boards ){
     std::cout << "# Running sanity tests" << std::endl;
     std::cout << "################################################################################" << std::endl;
 
+    /* Meta boards */
     piece_to_string ( str_piece, boards.all_pieces );
     test_all_pieces ( str_piece );
 
@@ -194,5 +196,17 @@ void run_piece_tests ( const Boards boards ){
     test_black_king ( str_piece );
 
     test_no_conflicting_pieces ( boards );
+
+    /* Square identification */
+    BitBoard* bb_pointer;
+    IdentifyPiece *ident = new IdentifyPiece();
+
+    bb_pointer = ident->return_piece ( "H", "8" );
+    assert ( *bb_pointer == boards.black_rooks );
+    /*
+    bb_pointer = ident->return_piece ( "E", "1" );
+    assert ( *bb_pointer == boards.white_king );
+    */
+
 }
 

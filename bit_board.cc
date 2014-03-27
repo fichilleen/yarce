@@ -20,6 +20,7 @@
 
 #include "bit_board.h"
 #include "draw_board.h"
+#include "identify_piece.h"
 #include "shift_test.h"
 #include "test_pieces.h"
 
@@ -39,6 +40,22 @@ void apply_initial_positions ( Boards &board ){
     board.black_queens   = 0x1000000000000000;
     board.black_king     = 0x0800000000000000;
     //
+    board.empty = 0;
+
+    // Used for iteration
+    bitboard_vector.push_back ( &board.empty );
+    bitboard_vector.push_back ( &board.white_pawns );
+    bitboard_vector.push_back ( &board.white_knights );
+    bitboard_vector.push_back ( &board.white_rooks );
+    bitboard_vector.push_back ( &board.white_bishops );
+    bitboard_vector.push_back ( &board.white_queens );
+    bitboard_vector.push_back ( &board.white_king );
+    bitboard_vector.push_back ( &board.black_pawns );
+    bitboard_vector.push_back ( &board.black_knights );
+    bitboard_vector.push_back ( &board.black_rooks );
+    bitboard_vector.push_back ( &board.black_bishops );
+    bitboard_vector.push_back ( &board.black_queens );
+    bitboard_vector.push_back ( &board.black_king );
 }
 
 void update_boards ( Boards &board ){
@@ -54,9 +71,17 @@ int main (){
     Boards boards ;
     apply_initial_positions ( boards );
     update_boards ( boards );
+    init_lookups();
+
+    IdentifyPiece *ident = new IdentifyPiece();
+    ident->print_piece ( "H", "8" );
+
+    draw_board ( ident->show_square ( "E", "1" ) );
+
     run_piece_tests ( boards );
 
     /* Test board. Playing about with movements and stuff */
+    /*
     Boards test_board;
     test_board.white_queens = 0x0000000800000000;
     std::cout << "Starting:" << std::endl;
@@ -70,6 +95,10 @@ int main (){
 
     direction_shift ( test_board.white_queens, -8 );
     draw_board ( test_board.white_queens );
+
+    IdentifyPiece *ident = new IdentifyPiece();
+    ident->print_piece ( "H", "8" );
+    */
 
     return 0;
 }
