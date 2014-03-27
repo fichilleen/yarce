@@ -63,6 +63,6 @@ const BitBoard RANK_7 = RANK_1 << (8 * 6);
 const BitBoard RANK_8 = RANK_1 << (8 * 7);
 
 // Movement directions
-enum directions { NORTHWEST, NORTHEAST, NORTH, EAST, SOUTHEAST, SOUTH, SOUTHWEST };
+enum directions { NONE, EAST, NORTHEAST, NORTHWEST, WEST, SOUTHEAST, SOUTH, SOUTHWEST, NORTH };
 
 #endif /* YARCE_TYPES_H */

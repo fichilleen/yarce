@@ -54,14 +54,22 @@ int main (){
     Boards boards ;
     apply_initial_positions ( boards );
     update_boards ( boards );
-
-    draw_board ( boards.all_pieces );
     run_piece_tests ( boards );
-    direction east = EAST;
-    king_shift ( boards.black_king, east );
-    update_boards ( boards );
-    draw_board ( boards.all_pieces );
 
+    /* Test board. Playing about with movements and stuff */
+    Boards test_board;
+    test_board.white_queens = 0x0000000800000000;
+    std::cout << "Starting:" << std::endl;
+    draw_board ( test_board.white_queens );
+
+    direction_shift ( test_board.white_queens, 1 );
+    draw_board ( test_board.white_queens );
+
+    direction_shift ( test_board.white_queens, 8 );
+    draw_board ( test_board.white_queens );
+
+    direction_shift ( test_board.white_queens, -8 );
+    draw_board ( test_board.white_queens );
 
     return 0;
 }
