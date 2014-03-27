@@ -15,4 +15,4 @@
 */
 
 #include "types.h"
-void king_shift ( BitBoard &king, direction shift_dir );
+void direction_shift ( BitBoard &king, int shift_dir );
