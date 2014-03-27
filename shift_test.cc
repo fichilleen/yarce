@@ -16,14 +16,17 @@
 
 #include "shift_test.h"
 
-#define SHIFT_EAST << 1
-
-void king_shift ( BitBoard &king, direction shift_dir ){
-    if ( shift_dir == EAST ){
-        if ( ! (file_h & king)){
-            king = king SHIFT_EAST;
-        }
+void direction_shift ( BitBoard &board, int direction ){
+    /*
+    if ( (direction == EAST) && (!(FILE_H & board) ) ){
+        board = board << direction;
     }
+    else if ( (direction == WEST) && (!(FILE_H & board) ) ){
+        board = board << direction;
+    }
+    else { */
+        board = board << direction ;
+    //}
 }
 
 
