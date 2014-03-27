@@ -14,6 +14,10 @@
     along with yarce.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+#include <map>
+#include <string>
+#include <vector>
+
 #ifndef YARCE_TYPES_H
 #define YARCE_TYPES_H
  
@@ -35,6 +39,7 @@ typedef struct Boards {
     BitBoard black_queens;
     BitBoard black_king;
     // Meta positions
+    BitBoard empty;
     BitBoard white_pieces;
     BitBoard black_pieces;
     BitBoard all_pieces;
@@ -61,5 +66,9 @@ const BitBoard RANK_5 = RANK_1 << (8 * 4);
 const BitBoard RANK_6 = RANK_1 << (8 * 5);
 const BitBoard RANK_7 = RANK_1 << (8 * 6);
 const BitBoard RANK_8 = RANK_1 << (8 * 7);
+
+extern std::map <std::string,BitBoard*> file_rank_lookup;
+extern std::vector <BitBoard*> bitboard_vector;
+void init_lookups();
 
 #endif /* YARCE_TYPES_H */
