@@ -27,7 +27,7 @@
 
 void apply_initial_positions ( Boards &board ){
     board.white_pawns    = 0x000000000000ff00;
-    board.white_knights  = 0x0000000000000042;
+    board.white_knights  = 0x0000000000000042; // http://eatthattoast.com/comic/nice-guys/
     board.white_rooks    = 0x0000000000000081;
     board.white_bishops  = 0x0000000000000024;
     board.white_queens   = 0x0000000000000010;
