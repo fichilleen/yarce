@@ -14,19 +14,14 @@
     along with yarce.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+#include <cstdlib> // abs
 #include "shift_test.h"
 
 void direction_shift ( BitBoard &board, int direction ){
-    /*
-    if ( (direction == EAST) && (!(FILE_H & board) ) ){
-        board = board << direction;
-    }
-    else if ( (direction == WEST) && (!(FILE_H & board) ) ){
-        board = board << direction;
-    }
-    else { */
+    if ( direction < 0 )
+        board = board >> abs ( direction );
+    else
         board = board << direction ;
-    //}
 }
 
 
