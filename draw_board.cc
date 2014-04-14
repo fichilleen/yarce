@@ -28,3 +28,21 @@ void draw_board ( const BitBoard &board ){
     }
     std::cout << std::endl;
 }
+
+const std::string pretty(BitBoard b) {
+    // This is pretty much copied verbatim from stockfish
+    // I just changed the variables so they match my stuff
+
+  std::string s = "+---+---+---+---+---+---+---+---+\n";
+
+  for (int rank = 8; rank >= 0; --rank)
+  {
+      for (char file = 'A'; file <= 'H'; ++file)
+          s.append(b & (file | rank) ? "| X " : "|   ");
+
+      s.append("|\n+---+---+---+---+---+---+---+---+\n");
+  }
+
+  return s;
+}
+

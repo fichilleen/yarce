@@ -95,10 +95,9 @@ int main (){
 
     direction_shift ( test_board.white_queens, -8 );
     draw_board ( test_board.white_queens );
-
-    IdentifyPiece *ident = new IdentifyPiece();
-    ident->print_piece ( "H", "8" );
     */
+    draw_board ( FILE_A );
+    draw_board ( RANK_1 );
 
     return 0;
 }

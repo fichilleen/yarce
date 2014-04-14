@@ -14,5 +14,8 @@
     along with yarce.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+#include <string>
 #include "types.h"
+
 void draw_board ( const BitBoard &board);
+const std::string pretty ( const BitBoard &board);
