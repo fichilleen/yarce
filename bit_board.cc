@@ -27,7 +27,7 @@
 
 void apply_initial_positions ( Boards &board ){
     board.white_pawns    = 0x000000000000ff00;
-    board.white_knights  = 0x0000000000000042; // http://eatthattoast.com/comic/nice-guys/
+    board.white_knights  = 0x0000000000000042;
     board.white_rooks    = 0x0000000000000081;
     board.white_bishops  = 0x0000000000000024;
     board.white_queens   = 0x0000000000000010;
@@ -74,9 +74,9 @@ int main (){
     init_lookups();
 
     IdentifyPiece *ident = new IdentifyPiece();
-    ident->print_piece ( "H", "8" );
+    ident->print_piece ( 'H', '8' );
 
-    draw_board ( ident->show_square ( "E", "1" ) );
+    draw_board ( ident->show_square ( 'E', '1' ) );
 
     run_piece_tests ( boards );
 
@@ -98,6 +98,8 @@ int main (){
     */
     draw_board ( FILE_A );
     draw_board ( RANK_1 );
+
+    std::cout << pretty ( boards.white_pawns );
 
     return 0;
 }

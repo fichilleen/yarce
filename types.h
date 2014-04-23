@@ -67,7 +67,7 @@ const BitBoard RANK_6 = RANK_1 << (8 * 5);
 const BitBoard RANK_7 = RANK_1 << (8 * 6);
 const BitBoard RANK_8 = RANK_1 << (8 * 7);
 
-extern std::map <std::string,BitBoard*> file_rank_lookup;
+extern std::map <char,BitBoard*> file_rank_lookup;
 extern std::vector <BitBoard*> bitboard_vector;
 void init_lookups();
 

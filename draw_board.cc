@@ -29,17 +29,21 @@ void draw_board ( const BitBoard &board ){
     std::cout << std::endl;
 }
 
-const std::string pretty(BitBoard b) {
-    // This is pretty much copied verbatim from stockfish
-    // I just changed the variables so they match my stuff
+const std::string pretty( const BitBoard &b) {
+    // This is copied pretty closely from a function in stockfish
 
   std::string s = "+---+---+---+---+---+---+---+---+\n";
 
-  for (int rank = 8; rank >= 0; --rank)
+  for (char rank = '8'; rank >= '1'; --rank)
   {
       for (char file = 'A'; file <= 'H'; ++file)
-          s.append(b & (file | rank) ? "| X " : "|   ");
+      {
 
+          //std::cout << "File: " << *file_rank_lookup[file] << std::endl;
+          //std::cout << "Rank: " << *file_rank_lookup[rank] << std::endl;
+
+          s.append ( b & ( *file_rank_lookup[file] & *file_rank_lookup[rank] ) ? "| X " : "|   ");
+      }
       s.append("|\n+---+---+---+---+---+---+---+---+\n");
   }
 

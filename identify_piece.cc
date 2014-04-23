@@ -4,7 +4,7 @@
 
 IdentifyPiece::IdentifyPiece(){}
 
-void IdentifyPiece::print_piece ( std::string which_file, std::string which_rank ){
+void IdentifyPiece::print_piece ( char which_file, char which_rank ){
     // Not really sure about this method. Was thinking about using it for
     // debugging, but I can't think of a nice way for it to print the name of
     // the piece
@@ -20,7 +20,7 @@ void IdentifyPiece::print_piece ( std::string which_file, std::string which_rank
     }
 }
 
-BitBoard* IdentifyPiece::return_piece ( std::string which_file, std::string which_rank ){
+BitBoard* IdentifyPiece::return_piece ( char which_file, char which_rank ){
     BitBoard *rank = file_rank_lookup [ which_rank ];
     BitBoard *file = file_rank_lookup [ which_file ];
     BitBoard on_position = *rank & *file;
@@ -35,7 +35,7 @@ BitBoard* IdentifyPiece::return_piece ( std::string which_file, std::string whic
     return bitboard_vector[0];
 }
 
-BitBoard IdentifyPiece::show_square ( std::string which_file, std::string which_rank ){
+BitBoard IdentifyPiece::show_square ( char which_file, char which_rank ){
     BitBoard *rank = file_rank_lookup [ which_rank ];
     BitBoard *file = file_rank_lookup [ which_file ];
     return *rank & *file;

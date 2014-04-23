@@ -201,7 +201,7 @@ void run_piece_tests ( const Boards boards ){
     BitBoard* bb_pointer;
     IdentifyPiece *ident = new IdentifyPiece();
 
-    bb_pointer = ident->return_piece ( "H", "8" );
+    bb_pointer = ident->return_piece ( 'H', '8' );
     assert ( *bb_pointer == boards.black_rooks );
     /*
     bb_pointer = ident->return_piece ( "E", "1" );

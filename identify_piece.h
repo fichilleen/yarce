@@ -8,9 +8,9 @@
 class IdentifyPiece{
 public:
     IdentifyPiece ();
-    void print_piece ( std::string which_file, std::string which_rank );
-    BitBoard* return_piece ( std::string which_file, std::string which_rank );
-    BitBoard show_square ( std::string which_file, std::string which_rank );
+    void print_piece ( char which_file, char which_rank );
+    BitBoard* return_piece ( char which_file, char which_rank );
+    BitBoard show_square ( char which_file, char which_rank );
 };
 
 #endif 
