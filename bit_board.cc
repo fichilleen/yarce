@@ -73,15 +73,13 @@ int main (){
     update_boards ( boards );
     init_lookups();
 
+    /*
     IdentifyPiece *ident = new IdentifyPiece();
     ident->print_piece ( 'H', '8' );
-
-    draw_board ( ident->show_square ( 'E', '1' ) );
-
+     
     run_piece_tests ( boards );
 
-    /* Test board. Playing about with movements and stuff */
-    /*
+    // Test board. Playing about with movements and stuff
     Boards test_board;
     test_board.white_queens = 0x0000000800000000;
     std::cout << "Starting:" << std::endl;
@@ -95,11 +93,58 @@ int main (){
 
     direction_shift ( test_board.white_queens, -8 );
     draw_board ( test_board.white_queens );
-    */
     draw_board ( FILE_A );
     draw_board ( RANK_1 );
 
-    std::cout << pretty ( boards.white_pawns );
+    std::cout << pretty ( boards.white_pawns ) << std::endl;
+    std::cout << pretty ( FILE_E ) << std::endl;
+    std::cout << pretty ( ident->show_square ( 'E', '1' ) ) << std::endl;
+    std::cout << pretty ( boards.black_king | boards.white_king ) << std::endl;
+
+    std::string str_file_a ;
+    piece_to_string ( str_file_a, FILE_A );
+    std::cout << str_file_a << std::endl ;
+
+    */
+
+    BitBoard test_board;
+    test_board = 0x0000000800000000;
+    std::cout << "Starting position: " << std::endl;
+    std::cout << pretty ( test_board ) << std::endl;
+
+    // Directions definted in types.h
+
+    direction_shift ( test_board, EAST );
+    std::cout << "East: " << std::endl;
+    std::cout << pretty ( test_board ) << std::endl;
+
+    direction_shift ( test_board, NORTHEAST );
+    std::cout << "North East: " << std::endl;
+    std::cout << pretty ( test_board ) << std::endl;
+
+    direction_shift ( test_board, NORTH );
+    std::cout << "North: " << std::endl;
+    std::cout << pretty ( test_board ) << std::endl;
+
+    direction_shift ( test_board, NORTHWEST );
+    std::cout << "North West: " << std::endl;
+    std::cout << pretty ( test_board ) << std::endl;
+
+    direction_shift ( test_board, WEST );
+    std::cout << "West: " << std::endl;
+    std::cout << pretty ( test_board ) << std::endl;
+
+    direction_shift ( test_board, SOUTHWEST );
+    std::cout << "South West: " << std::endl;
+    std::cout << pretty ( test_board ) << std::endl;
+
+    direction_shift ( test_board, SOUTH );
+    std::cout << "South: " << std::endl;
+    std::cout << pretty ( test_board ) << std::endl;
+
+    direction_shift ( test_board, SOUTHEAST );
+    std::cout << "South East: " << std::endl;
+    std::cout << pretty ( test_board ) << std::endl;
 
     return 0;
 }
