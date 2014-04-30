@@ -1,5 +1,8 @@
 #include "../types.h"
 
+#ifndef BITTLESHIP_H
+#define BITTLESHIP_H
+
 enum ret_code { MISSED, HIT, SANK, ALL_SANK };
 
 class Ships{
@@ -22,5 +25,7 @@ public:
     int fire_at ( const char &file, const char &rank );
     bool add_ship ( const int &ship, const char &file, const char &rank );
     void public_view ( BitBoard &view );
-    void private_view ( BitBoard &view );
+    void private_view ( BitBoard &hit, BitBoard &missed, BitBoard &placed );
 };
+
+#endif
