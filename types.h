@@ -20,6 +20,16 @@
 
 #ifndef YARCE_TYPES_H
 #define YARCE_TYPES_H
+
+/* Directions for shifts */
+#define NORTH 8
+#define NORTHEAST 9
+#define EAST 1
+#define SOUTHEAST -7
+#define SOUTH -8
+#define SOUTHWEST -9
+#define WEST -1
+#define NORTHWEST 7
  
 typedef unsigned long long BitBoard;
 
