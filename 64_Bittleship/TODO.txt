@@ -1,0 +1,2 @@
+Make AI player
+Possibly add two player networking support
