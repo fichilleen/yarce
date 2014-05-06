@@ -1,9 +1,6 @@
 #include "Ships.h"
 #include <iostream>
 
-using namespace std;
-
-
 Ships::Ships(){
     init_lookups();
     for ( unsigned int i=0; i>sizeof(this->player_ships); i++ )
@@ -30,16 +27,36 @@ void Ships::set_ship_bits ( const int &ship, const char &file, const char &rank 
 bool Ships::add_ship ( const int &ship, const char &start_file, const char &start_rank, const char &to_file, const char &to_rank ){
     // Making sure the ship is the correct length is left to the client
 
+    // Make a temporary ship then merge it with the real target ship. This
+    // allows us to make sure we don't collide with an already placed ship,
+    // without the cost of iterating twice
     if ( start_file == to_file ){
         if ( start_rank == to_rank ){
             std::cout << "Error: No range specified" << std::endl;
             return false;
+        }
+
+        /* Iterating over this twice is kind of nasty.
+         * TODO: Think of a better way to check if any of these squares are
+         * taken before setting them */
+
+        for (char i=start_rank; i<=to_rank; ++i){
+            if ( (*file_rank_lookup[start_file] & *file_rank_lookup[i]) & this->all_ships ){
+                std::cout << "Error: Ship would itersect another on " << start_file << i << std::endl;
+                return false;
+            }
         }
         for (char i=start_rank; i<=to_rank; ++i){
             this->set_ship_bits ( ship, start_file, i );
         }
     }
     else{
+        for (char i=start_rank; i<=to_rank; ++i){
+            if ( (*file_rank_lookup[i] & *file_rank_lookup[start_rank]) & this->all_ships ){
+                std::cout << "Error: Ship would itersect another on " << i << start_rank << std::endl;
+                return false;
+            }
+        }
         for (char i=start_file; i<=to_file; ++i){
             this->set_ship_bits ( ship, i, to_rank );
         }
@@ -94,7 +111,7 @@ int Ships::fire_at ( const char &file, const char &rank ){
     return 9; // Debugging. Shouldn't hit this
 }
 
-void Ships::private_view ( BitBoard &hit, BitBoard &missed, BitBoard &placed, BitBoard &sank ){
+void Ships::private_view ( BitBoard &hit, BitBoard &missed, BitBoard &sank, BitBoard &placed ){
     // Show user's ships, and attacks, both hit and miss by enemy player
     hit = this->hit;
     missed = this->missed;

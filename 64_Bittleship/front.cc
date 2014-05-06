@@ -68,8 +68,9 @@ void add_user_ships ( Ships &player_ship ){
 
     while ( ship_length > 1 ){
 
+        bool ship_valid = false;
         int user_length = 0;
-        while ( user_length != ship_length ){
+        while ( ship_valid == false ){
             std::cout << "Ship of length " << ship_length << " start file:" << std::endl;
             s_file = get_file();
             std::cout << "Start rank:" << std::endl;
@@ -82,7 +83,6 @@ void add_user_ships ( Ships &player_ship ){
 
             if ( s_rank == t_rank ){
                 user_length = ( t_file - s_file ) + 1;
-                //std::cout << "Debug: user_length = t_file - s_file:" << user_length << " " << t_file << " " << s_file << std::endl;
             }
             else{
                 if ( s_file != t_file ){
@@ -90,7 +90,6 @@ void add_user_ships ( Ships &player_ship ){
                     continue;
                 }
                 user_length = ( t_rank - s_rank ) + 1;
-                //std::cout << "Debug: user_length = t_rank - s_rank:" << user_length << " " << t_rank << " " << s_rank << std::endl;
             }
 
             if ( user_length != ship_length ){
@@ -100,6 +99,9 @@ void add_user_ships ( Ships &player_ship ){
 
             if ( ! (player_ship.add_ship ( which_ship, s_file, s_rank, t_file, t_rank ) )){
                 continue;
+            }
+            else {
+                ship_valid = true;
             }
         }
         player_ship.private_view ( hit, missed, placed, sank );
@@ -127,20 +129,6 @@ int main (){
 
     Ships *test_ship = new Ships();
 
-    /*
-    test_ship->add_ship ( 0, 'A', '1' );
-    test_ship->add_ship ( 0, 'A', '2' );
-    test_ship->add_ship ( 0, 'A', '3' );
-    test_ship->add_ship ( 0, 'A', '4' );
-
-    test_ship->add_ship ( 1, 'E', '5' );
-    test_ship->add_ship ( 1, 'F', '5' );
-    test_ship->add_ship ( 1, 'G', '5' );
-
-    test_ship->add_ship ( 2, 'D', '2' );
-    test_ship->add_ship ( 2, 'E', '2' );
-    */
-
     BitBoard hit = 0;
     BitBoard missed = 0;
     BitBoard placed = 0;
@@ -158,28 +146,9 @@ int main (){
         draw_board ( hit, missed, placed, sank );
     }
 
-    /*
+    std::cout << "All ships sank!" << std::endl;
+    test_ship->private_view ( hit, missed, sank, placed );
     draw_board ( hit, missed, placed, sank );
-
-    int ret;
-    ret = test_ship->fire_at ( 'A', '2' );
-    std::cout << "Fire at A2: " << ret << std::endl;
-    ret = test_ship->fire_at ( 'B', '7' );
-    std::cout << "Fire at B7: " << ret << std::endl;
-
-    test_ship->private_view ( hit, missed, placed, sank );
-    draw_board ( hit, missed, placed, sank );
-
-    ret = test_ship->fire_at ( 'D', '2' );
-    std::cout << "Fire at D2: " << ret << std::endl;
-    ret = test_ship->fire_at ( 'E', '2' );
-    std::cout << "Fire at E2: " << ret << std::endl;
-    test_ship->private_view ( hit, missed, placed, sank );
-    draw_board ( hit, missed, placed, sank );
-
-    ret = test_ship->fire_at ( 'E', '2' );
-    std::cout << "Fire at E2: " << ret << std::endl;
-    */
 
     return 0;
 }
