@@ -26,7 +26,7 @@ class Ships{
 public:
     Ships();
     int fire_at ( const char &file, const char &rank );
-    bool add_ship ( const int &ship, const char &start_file, const char &start_rank, const char &to_file, const char &to_rank );
+    bool add_ship ( const int &ship, const char &start_file, const char &start_rank, const char &to_file, const char &to_rank, bool err );
     void public_view ( BitBoard &hit, BitBoard &missed, BitBoard &sank );
     void private_view ( BitBoard &hit, BitBoard &missed, BitBoard &sank, BitBoard &placed );
 };

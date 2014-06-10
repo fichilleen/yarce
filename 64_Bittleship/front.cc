@@ -1,34 +1,8 @@
+#include "AI.h"
 #include "Ships.h"
+#include "utils.h"
 #include <iostream>
 #include <string>
-
-void draw_board ( const BitBoard &hit, const BitBoard &missed, const BitBoard &placed, const BitBoard &sank ){
-    std::cout << "X: Hit -- M: Missed -- O: Placed -- S: Sank" << std::endl;
-    std::cout << "+---+---+---+---+---+---+---+---+" << std::endl;
-    for (char rank = '8'; rank >= '1'; --rank) {
-        for (char file = 'A'; file <= 'H'; ++file) {
-
-            if ( sank & ( *file_rank_lookup[file] & *file_rank_lookup[rank] )){
-                std::cout << "| S ";
-                continue;
-            }
-            if ( hit & ( *file_rank_lookup[file] & *file_rank_lookup[rank] )){
-                std::cout << "| X ";
-                continue;
-            }
-            if ( missed & ( *file_rank_lookup[file] & *file_rank_lookup[rank] )){
-                std::cout << "| M ";
-                continue;
-            }
-            if ( placed & ( *file_rank_lookup[file] & *file_rank_lookup[rank] )){
-                std::cout << "| 0 ";
-                continue;
-            }
-            std::cout << "| " << file << rank;
-        }
-        std::cout << "|\n+---+---+---+---+---+---+---+---+" << std::endl;
-    }
-}
 
 char get_file (){
     char file;
@@ -97,7 +71,7 @@ void add_user_ships ( Ships &player_ship ){
                 continue;
             }
 
-            if ( ! (player_ship.add_ship ( which_ship, s_file, s_rank, t_file, t_rank ) )){
+            if ( ! (player_ship.add_ship ( which_ship, s_file, s_rank, t_file, t_rank, true ) )){
                 continue;
             }
             else {
@@ -127,28 +101,55 @@ int handle_firing ( Ships &player_ship ){
 
 int main (){
 
-    Ships *test_ship = new Ships();
+    //Ships *test_ship = new Ships();
+    
+    std::string name1, name2;
+    name1 = "AI player 1";
+    name2 = "AI player 2";
+    AI *ai_player = new AI( name1 );
+    ai_player->setup_ships();
 
     BitBoard hit = 0;
     BitBoard missed = 0;
     BitBoard placed = 0;
     BitBoard sank = 0;
 
-    add_user_ships ( *test_ship );
+    //add_user_ships ( *test_ship );
 
-    test_ship->public_view ( hit, missed, sank );
-    draw_board ( hit, missed, placed, sank );
+    //test_ship->public_view ( hit, missed, sank );
+    //draw_board ( hit, missed, placed, sank );
+    
 
-    int fire_return = 0;
+    int fire_return = 0, fire_return2 = 0;
+    AI *ai_player2 = new AI( name2 );
+    ai_player2->setup_ships();
+
+    while (( fire_return != ALL_SANK) && ( fire_return2 != ALL_SANK)){
+        fire_return = ai_player->take_turn ( *ai_player2->ai_ship );
+        ai_player2->ai_ship->public_view ( hit, missed, sank );
+        draw_board ( hit, missed, placed, sank );
+
+        fire_return2 = ai_player2->take_turn ( *ai_player->ai_ship );
+        ai_player->ai_ship->public_view ( hit, missed, sank );
+        draw_board ( hit, missed, placed, sank );
+    }
+
+    while ( fire_return != ALL_SANK ){
+        fire_return = handle_firing ( *ai_player->ai_ship );
+        ai_player->ai_ship->public_view ( hit, missed, sank );
+        draw_board ( hit, missed, placed, sank );
+    }
+    /*
     while ( fire_return != ALL_SANK ){
         fire_return = handle_firing ( *test_ship );
         test_ship->public_view ( hit, missed, sank );
         draw_board ( hit, missed, placed, sank );
     }
+    */
 
     std::cout << "All ships sank!" << std::endl;
-    test_ship->private_view ( hit, missed, sank, placed );
-    draw_board ( hit, missed, placed, sank );
+    //test_ship->private_view ( hit, missed, sank, placed );
+    //draw_board ( hit, missed, placed, sank );
 
     return 0;
 }

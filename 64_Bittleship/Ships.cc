@@ -1,4 +1,5 @@
 #include "Ships.h"
+#include "utils.h"
 #include <iostream>
 
 Ships::Ships(){
@@ -19,14 +20,17 @@ void Ships::update_metaship (){
 
 void Ships::set_ship_bits ( const int &ship, const char &file, const char &rank ){
     // Backend for setting up ships. Takes parameters from add_ship 
-    this->player_ships[ship] |= (*file_rank_lookup[file] & *file_rank_lookup[rank]);
+    BitBoard tmp_board;
+    intersect_file_rank ( tmp_board, file, rank );
+    this->player_ships[ship] |= tmp_board;
     this->original_ships[ship] = this->player_ships[ship];
     this->update_metaship();
 }
 
-bool Ships::add_ship ( const int &ship, const char &start_file, const char &start_rank, const char &to_file, const char &to_rank ){
+bool Ships::add_ship ( const int &ship, const char &start_file, const char &start_rank, const char &to_file, const char &to_rank, bool err ){
     // Making sure the ship is the correct length is left to the client
 
+    BitBoard lookup;
     // Make a temporary ship then merge it with the real target ship. This
     // allows us to make sure we don't collide with an already placed ship,
     // without the cost of iterating twice
@@ -41,8 +45,11 @@ bool Ships::add_ship ( const int &ship, const char &start_file, const char &star
          * taken before setting them */
 
         for (char i=start_rank; i<=to_rank; ++i){
-            if ( (*file_rank_lookup[start_file] & *file_rank_lookup[i]) & this->all_ships ){
-                std::cout << "Error: Ship would itersect another on " << start_file << i << std::endl;
+            intersect_file_rank ( lookup, start_file, i );
+            if ( lookup & this->all_ships ){
+                if ( err ){
+                    std::cout << "Error: Ship would itersect another on " << start_file << i << std::endl;
+                }
                 return false;
             }
         }
@@ -52,8 +59,11 @@ bool Ships::add_ship ( const int &ship, const char &start_file, const char &star
     }
     else{
         for (char i=start_rank; i<=to_rank; ++i){
-            if ( (*file_rank_lookup[i] & *file_rank_lookup[start_rank]) & this->all_ships ){
-                std::cout << "Error: Ship would itersect another on " << i << start_rank << std::endl;
+            intersect_file_rank ( lookup, i, start_rank );
+            if ( lookup & this->all_ships ){
+                if ( err ){
+                    std::cout << "Error: Ship would itersect another on " << i << start_rank << std::endl;
+                }
                 return false;
             }
         }
@@ -67,7 +77,8 @@ bool Ships::add_ship ( const int &ship, const char &start_file, const char &star
 int Ships::fire_at ( const char &file, const char &rank ){
 
     // Take file/rank (eg. A/1), get corresponding square
-    BitBoard hit_square = ( *file_rank_lookup[file] & *file_rank_lookup[rank] );
+    BitBoard hit_square;
+    intersect_file_rank ( hit_square, file, rank );
 
     if ((hit_square & this->missed ) || (hit_square & this->hit)){
         std::cout << "You can't fire at a position fired at previously" << std::endl;
