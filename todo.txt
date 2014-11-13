@@ -1,0 +1,6 @@
+# Originally written as a way to play about with bitwise stuff in C++, then put on the backburner
+
+(A) - Move generation and search hasn't been started yet
+(A) - Change the row/col lookup to a size 64 char array
+(B) - Move away from expensive C++ stuff generally, possibly convert the entire codebase into C99
+(C) - Improve the AI in Bittleships, or but it on the backburner. There are a few bugs in it, and it's slow
